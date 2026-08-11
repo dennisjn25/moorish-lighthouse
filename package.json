@@ -1,0 +1,27 @@
+{
+  "name": "moorish-lighthouse",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev --workspace @moorish-lighthouse/web",
+    "dev:studio": "npm run dev --workspace @moorish-lighthouse/studio",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "npm run lint --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "build": "npm run build --workspaces --if-present",
+    "e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.12.1",
+    "@playwright/test": "1.62.1",
+    "prettier": "3.9.6"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}
