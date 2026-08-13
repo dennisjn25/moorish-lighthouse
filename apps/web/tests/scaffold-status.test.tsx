@@ -24,6 +24,10 @@ describe("Premium editorial application shell", () => {
     expect(
       within(primary).getByRole("link", { name: "Learn" }),
     ).toHaveAttribute("href", "/learn");
+    expect(within(primary).getByRole("link", { name: "Shop" })).toHaveAttribute(
+      "href",
+      "/shop",
+    );
     expect(
       screen.getByRole("navigation", { name: "Mobile primary" }),
     ).toBeInTheDocument();

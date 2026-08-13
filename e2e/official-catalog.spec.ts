@@ -7,6 +7,23 @@ test("the video library links every official catalog entry", async ({
   await page.goto("/videos");
 
   for (const video of officialYoutubeVideos) {
+    const thumbnails = page.getByAltText(`Thumbnail for ${video.title}`);
+    expect(await thumbnails.count()).toBeGreaterThanOrEqual(1);
+    for (const thumbnail of await thumbnails.all()) {
+      await thumbnail.scrollIntoViewIfNeeded();
+      await expect(thumbnail).toBeVisible();
+      await expect
+        .poll(async () => {
+          const src = await thumbnail.getAttribute("src");
+          return src ? decodeURIComponent(src) : "";
+        })
+        .toMatch(
+          new RegExp(`/vi/${video.id}/(?:maxresdefault|hqdefault)\\.jpg`),
+        );
+      await expect
+        .poll(() => thumbnail.evaluate((image) => image.naturalWidth))
+        .toBeGreaterThan(0);
+    }
     await expect(
       page.getByRole("link", { name: video.title }).first(),
     ).toHaveAttribute("href", `/videos/${video.slug}`);
@@ -21,9 +38,12 @@ for (const video of officialYoutubeVideos) {
     await expect(
       page.getByRole("heading", { level: 1, name: video.title }),
     ).toBeVisible();
-    await expect(
-      page.getByRole("link", { name: "Open the attributed official channel" }),
-    ).toHaveAttribute("href", video.youtubeUrl);
+    const player = page.getByTitle(`Play ${video.title}`);
+    await expect(player).toBeVisible();
+    await expect(player).toHaveAttribute(
+      "src",
+      new RegExp(`/embed/${video.id}\\?rel=0$`),
+    );
     await expect(page.locator(".transcript > p")).toHaveCount(3);
 
     for (const evidence of video.transcriptEvidence ?? []) {

@@ -5,8 +5,9 @@ import { ButtonLink, Container } from "@/components/ui";
 const navigation = [
   { href: "/", label: "Home" },
   { href: "/learn", label: "Learn" },
-  { href: "/articles", label: "Articles" },
+  { href: "/articles", label: "Blog" },
   { href: "/videos", label: "Videos" },
+  { href: "/shop", label: "Shop" },
   { href: "/about", label: "About" },
 ] as const;
 

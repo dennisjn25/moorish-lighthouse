@@ -36,7 +36,19 @@ describe("content repository", () => {
     expect(previewCatalog.topics).toHaveLength(3);
     expect(previewCatalog.lessons).toHaveLength(3);
     expect(previewCatalog.articles).toHaveLength(3);
-    expect(previewCatalog.products).toHaveLength(0);
+    expect(previewCatalog.products.map((product) => product.title)).toEqual([
+      "Adverse Possession ebook Bundle",
+      "Child Support Consultation",
+      "Child Support Live Class",
+      "Free From Birth Bundle",
+    ]);
+    expect(
+      previewCatalog.products.every(
+        (product) =>
+          product.availability === "coming-soon" &&
+          product.source.label.includes("site owner"),
+      ),
+    ).toBe(true);
 
     for (const item of [
       ...previewCatalog.topics,

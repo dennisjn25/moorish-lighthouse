@@ -11,6 +11,7 @@ import {
   SelectField,
 } from "@/components/content-ui";
 import { getCatalog, searchCatalog } from "@/lib/content/repository";
+import { VideoThumbnail } from "@/components/video-thumbnail";
 
 export async function LearnHub({
   level = "",
@@ -126,13 +127,14 @@ export async function ArticlesIndex({
     <>
       {catalog.mode === "fixtures" ? <PreviewNotice /> : null}
       <PageIntro
-        breadcrumbs={[{ href: "/", label: "Home" }, { label: "Articles" }]}
-        eyebrow="Editorial archive"
-        title="Read the channel’s core ideas with attribution intact."
+        breadcrumbs={[{ href: "/", label: "Home" }, { label: "Blog" }]}
+        eyebrow="From Moorish Lighthouse"
+        title="Ideas, updates, and practical guidance from the owner."
       >
         <p>
-          Transcript-grounded editorial guides that summarize the creator’s
-          recurring themes and link back to the official presentation.
+          Read the latest posts from Moorish Lighthouse. New writing can be
+          drafted, edited, and published by the owner through the private
+          Studio.
         </p>
       </PageIntro>
 
@@ -144,11 +146,11 @@ export async function ArticlesIndex({
               variant="research"
             />
             <div>
-              <p className="eyebrow">Featured reading</p>
+              <p className="eyebrow">Latest featured post</p>
               <h2>{featured.title}</h2>
               <p>{featured.dek}</p>
               <ButtonLink href={`/articles/${featured.slug}`}>
-                Read the article
+                Read the post
               </ButtonLink>
             </div>
           </Container>
@@ -159,14 +161,14 @@ export async function ArticlesIndex({
         <Container size="wide">
           <div className="archive-heading archive-heading--top">
             <div>
-              <p className="eyebrow">All articles</p>
-              <h2>Find a line of inquiry.</h2>
+              <p className="eyebrow">Latest posts</p>
+              <h2>Explore the blog.</h2>
             </div>
-            <FilterBar label="Search and filter articles">
+            <FilterBar label="Search and filter blog posts">
               <Field
                 defaultValue={query}
                 id="article-query"
-                label="Search articles"
+                label="Search blog posts"
                 name="q"
                 placeholder="Search by title or subject"
                 type="search"
@@ -188,7 +190,7 @@ export async function ArticlesIndex({
                   <span className="editorial-list__number">0{index + 1}</span>
                   <div>
                     <p className="eyebrow">
-                      {item.minutes} min read ·{" "}
+                      {item.author} · {item.minutes} min read ·{" "}
                       {item.topicSlug.replaceAll("-", " ")}
                     </p>
                     <h2>
@@ -205,9 +207,9 @@ export async function ArticlesIndex({
           ) : (
             <EmptyState
               actionHref="/articles"
-              actionLabel="Return to all articles"
+              actionLabel="Return to all posts"
               message="Clear the current search or choose another topic."
-              title="No articles found."
+              title="No blog posts found."
             />
           )}
         </Container>
@@ -255,15 +257,13 @@ export async function VideosLibrary({
         <section className="video-feature">
           <Container className="video-feature__grid" size="wide">
             <div className="video-facade video-facade--feature">
-              <BeaconArtwork
+              <VideoThumbnail
                 className="video-facade__image"
-                label="Warm projector beam crossing a dark archival screening room"
-                variant="media"
+                title={featured.title}
+                youtubeUrl={featured.youtubeUrl}
               />
               <span className="video-facade__play" aria-hidden="true" />
-              <p>
-                Official embed loads only after selection on a published page.
-              </p>
+              <small>{featured.duration}</small>
             </div>
             <div>
               <p className="eyebrow">Featured lesson · {featured.series}</p>
@@ -308,10 +308,10 @@ export async function VideosLibrary({
               {videos.map((item) => (
                 <article key={item.id}>
                   <div className="video-facade">
-                    <BeaconArtwork
+                    <VideoThumbnail
                       className="video-facade__image"
-                      label="Warm projector beam crossing a dark archival screening room"
-                      variant="media"
+                      title={item.title}
+                      youtubeUrl={item.youtubeUrl}
                     />
                     <span className="video-facade__play" aria-hidden="true" />
                     <small>{item.duration}</small>
@@ -349,12 +349,13 @@ export async function ShopCatalog({ type = "" }: { type?: string }) {
       {catalog.mode === "fixtures" ? <PreviewNotice /> : null}
       <PageIntro
         breadcrumbs={[{ href: "/", label: "Home" }, { label: "Shop" }]}
-        eyebrow="Resource catalog"
-        title="Useful resources, presented without pressure."
+        eyebrow="Moorish Lighthouse shop"
+        title="Products and services for the next step."
       >
         <p>
-          Product types, delivery, availability, and terms stay visible. Preview
-          entries are not offers and cannot be purchased.
+          Browse the four approved offers. Prices, checkout, schedules, and
+          exact fulfillment terms will appear only after the owner confirms
+          them.
         </p>
       </PageIntro>
       <section className="shop-intro">
@@ -364,9 +365,9 @@ export async function ShopCatalog({ type = "" }: { type?: string }) {
             <h2>Learn first. Select only what fits the work.</h2>
           </div>
           <p>
-            Every production resource will link back to relevant free education
-            and state exactly what is delivered. Live checkout is outside this
-            preview build.
+            Each listing separates what is confirmed from what still needs owner
+            approval. Until checkout is connected, visitors can review details
+            and ask about availability without submitting payment information.
           </p>
         </Container>
       </section>
@@ -375,6 +376,7 @@ export async function ShopCatalog({ type = "" }: { type?: string }) {
           <FilterBar label="Filter product catalog">
             <SelectField defaultValue={type} label="Resource type" name="type">
               <option value="">All types</option>
+              <option>Bundle</option>
               <option>Digital guide</option>
               <option>Physical</option>
               <option>Course</option>
@@ -401,7 +403,7 @@ export async function ShopCatalog({ type = "" }: { type?: string }) {
                     <p>{item.summary}</p>
                     <div className="product-list__meta">
                       <span>{item.availability.replaceAll("-", " ")}</span>
-                      <span>No price in preview</span>
+                      <span>Price pending</span>
                     </div>
                     <ButtonLink href={`/shop/${item.slug}`} variant="secondary">
                       View details

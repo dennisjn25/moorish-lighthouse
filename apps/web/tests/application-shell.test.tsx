@@ -33,9 +33,12 @@ describe("Daylight Beacon application shell", () => {
     expect(
       screen.getAllByRole("link", { name: "Moorish Lighthouse home" }),
     ).toHaveLength(2);
+    expect(screen.getAllByRole("link", { name: "Shop" })).toHaveLength(3);
     expect(
-      screen.queryByRole("link", { name: "Shop" }),
-    ).not.toBeInTheDocument();
+      screen
+        .getByRole("navigation", { name: "Primary" })
+        .querySelector('a[href="/shop"]'),
+    ).toBeInTheDocument();
     expect(
       screen.queryByRole("link", { name: "Consulting" }),
     ).not.toBeInTheDocument();

@@ -73,7 +73,13 @@ export type Product = {
   title: string;
   slug: string;
   summary: string;
-  type: "Digital guide" | "Physical" | "Course" | "Workshop" | "Consultation";
+  type:
+    | "Bundle"
+    | "Consultation"
+    | "Course"
+    | "Digital guide"
+    | "Physical"
+    | "Workshop";
   fulfillment: string;
   availability: "unavailable" | "coming-soon";
   outcomes: string[];

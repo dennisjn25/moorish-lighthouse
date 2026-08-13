@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { TopicLanding } from "@/components/content-details";
-import { getTopic } from "@/lib/content/repository";
+import { getCatalog, getTopic } from "@/lib/content/repository";
+
+export async function generateStaticParams() {
+  return (await getCatalog()).topics.map(({ slug }) => ({ topic: slug }));
+}
 
 export async function generateMetadata({
   params,

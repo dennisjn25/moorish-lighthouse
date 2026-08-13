@@ -35,10 +35,10 @@ export const structure: StructureResolver = (S) =>
           S.list()
             .title("Editorial and media")
             .items([
-              S.documentTypeListItem("article").title("Articles"),
+              S.documentTypeListItem("article").title("Blog posts"),
               S.documentTypeListItem("video").title("Videos"),
               S.documentTypeListItem("author").title("Authors"),
             ]),
         ),
-      S.documentTypeListItem("product").title("Products and resources"),
+      S.documentTypeListItem("product").title("Shop products and services"),
     ]);

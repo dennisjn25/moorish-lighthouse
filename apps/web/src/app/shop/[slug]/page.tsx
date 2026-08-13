@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { ProductDetail } from "@/components/content-details";
-import { getProduct } from "@/lib/content/repository";
+import { getCatalog, getProduct } from "@/lib/content/repository";
+
+export async function generateStaticParams() {
+  return (await getCatalog()).products.map(({ slug }) => ({ slug }));
+}
 
 export async function generateMetadata({
   params,

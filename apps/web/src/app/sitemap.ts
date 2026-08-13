@@ -1,7 +1,10 @@
 import type { MetadataRoute } from "next";
 import { getCatalog } from "@/lib/content/repository";
 
-const base = "https://moorishlighthouse.com";
+export const dynamic = "force-static";
+
+const base =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://moorishlighthouse.com";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const catalog = await getCatalog();
   const published = <T extends { status: string }>(items: T[]) =>

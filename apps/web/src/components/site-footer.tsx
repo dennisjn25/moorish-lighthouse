@@ -8,8 +8,9 @@ const footerGroups = [
     links: [
       ["Start here", "/videos"],
       ["Learn", "/learn"],
-      ["Articles", "/articles"],
+      ["Blog", "/articles"],
       ["Videos", "/videos"],
+      ["Shop", "/shop"],
     ],
   },
   {

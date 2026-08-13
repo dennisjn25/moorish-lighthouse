@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { VideoDetail } from "@/components/content-details";
-import { getVideo } from "@/lib/content/repository";
+import { getCatalog, getVideo } from "@/lib/content/repository";
+
+export async function generateStaticParams() {
+  return (await getCatalog()).videos.map(({ slug }) => ({ slug }));
+}
 
 export async function generateMetadata({
   params,

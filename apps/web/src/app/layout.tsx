@@ -17,8 +17,11 @@ const publicSans = Public_Sans({
   variable: "--font-public-sans",
 });
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://moorishlighthouse.com";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://moorishlighthouse.com"),
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Moorish Lighthouse",
     template: "%s | Moorish Lighthouse",

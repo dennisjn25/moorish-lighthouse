@@ -17,6 +17,7 @@ import {
   getTopic,
   getVideo,
 } from "@/lib/content/repository";
+import { getYoutubeEmbedUrl } from "@/lib/content/youtube";
 
 function DetailBreadcrumbs({
   items,
@@ -395,6 +396,7 @@ export async function VideoDetail({ slug }: { slug: string }) {
   const lesson = catalog.lessons.find(
     (item) => item.topicSlug === video.topicSlug,
   );
+  const embedUrl = getYoutubeEmbedUrl(video.youtubeUrl);
 
   return (
     <>
@@ -419,26 +421,25 @@ export async function VideoDetail({ slug }: { slug: string }) {
           </header>
           <div className="watch-grid">
             <div>
-              <div className="video-player-placeholder">
-                <BeaconArtwork
-                  className="video-player-placeholder__image"
-                  label="Warm projector beam crossing a dark archival screening room"
-                  variant="media"
-                />
-                <div className="video-player-placeholder__message">
-                  <span className="video-facade__play" aria-hidden="true" />
-                  <strong>Privacy-conscious player area</strong>
-                  <p>
-                    The official YouTube player is not loaded in local preview
-                    mode.
-                  </p>
-                  {video.youtubeUrl ? (
-                    <a href={video.youtubeUrl} rel="noreferrer" target="_blank">
-                      Open the attributed official channel
-                    </a>
-                  ) : null}
+              {embedUrl ? (
+                <div className="video-player">
+                  <iframe
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    src={embedUrl}
+                    title={`Play ${video.title}`}
+                  />
                 </div>
-              </div>
+              ) : (
+                <div className="video-player-unavailable" role="status">
+                  <strong>Video unavailable</strong>
+                  <p>
+                    This entry does not have a valid official YouTube source.
+                  </p>
+                </div>
+              )}
               <SourceNote source={video.source} />
             </div>
             <aside>
@@ -531,7 +532,10 @@ export async function ProductDetail({ slug }: { slug: string }) {
   ]);
   if (!product) notFound();
   const relatedLesson = catalog.lessons[0];
-  const artworkVariant = product.type === "Workshop" ? "workshop" : "workbook";
+  const artworkVariant =
+    product.type === "Workshop" || product.type === "Consultation"
+      ? "workshop"
+      : "workbook";
 
   return (
     <>
@@ -574,12 +578,12 @@ export async function ProductDetail({ slug }: { slug: string }) {
                 <dd>Not supplied in preview</dd>
               </div>
             </dl>
-            <button className="button button--primary" disabled type="button">
-              Purchase unavailable
-            </button>
+            <ButtonLink href="/contact" variant="primary">
+              Ask about availability
+            </ButtonLink>
             <p className="product-summary__note">
-              No checkout, reservation, inventory, or price is implied by this
-              local fixture.
+              Checkout is not connected yet. Contacting Moorish Lighthouse does
+              not create a purchase, booking, or legal representation.
             </p>
           </div>
         </Container>

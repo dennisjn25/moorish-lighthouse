@@ -7,11 +7,6 @@ export const metadata: Metadata = {
     "Browse clearly described Moorish Lighthouse educational resources.",
 };
 
-export default async function ShopPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ type?: string }>;
-}) {
-  const params = await searchParams;
-  return <ShopCatalog type={params.type ?? ""} />;
+export default function ShopPage() {
+  return <ShopCatalog />;
 }

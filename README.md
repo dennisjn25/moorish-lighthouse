@@ -17,6 +17,17 @@ npm run dev:studio
 
 The web app defaults to `http://127.0.0.1:3000`. Sanity Studio prints its local URL when started. Copy `.env.example` to `.env.local` and provide development/test identifiers only; never commit credentials.
 
+## Owner administration
+
+Sanity Studio is the private content and catalog admin for Moorish Lighthouse. It
+manages site settings, navigation, authors, topics, lessons, blog posts, videos,
+and shop products/services. Draft and publish controls determine what the public
+site reads from Sanity.
+
+Studio does not manage payment capture, orders, refunds, consultation bookings,
+or class attendance. Those require an approved commerce/booking provider and a
+separate owner workflow before the store is transactional.
+
 ## Quality gates
 
 ```bash

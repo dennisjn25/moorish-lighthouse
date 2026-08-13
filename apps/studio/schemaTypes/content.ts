@@ -439,7 +439,7 @@ export const lesson = defineType({
 
 export const article = defineType({
   name: "article",
-  title: "Article",
+  title: "Blog post",
   type: "document",
   fields: [
     defineField({
@@ -451,7 +451,7 @@ export const article = defineType({
     slugField,
     defineField({
       name: "dek",
-      title: "Standfirst",
+      title: "Excerpt",
       type: "text",
       rows: 3,
       validation: (Rule) => Rule.required().max(220),
@@ -491,7 +491,7 @@ export const article = defineType({
     }),
     defineField({
       name: "body",
-      title: "Article body",
+      title: "Post content",
       type: "array",
       of: [
         defineArrayMember({ type: "block" }),
@@ -518,7 +518,9 @@ export const article = defineType({
     }),
     defineField({
       name: "references",
-      title: "References",
+      title: "Supporting sources",
+      description:
+        "Optional supporting links for sourced or research-heavy posts.",
       type: "array",
       of: [
         defineArrayMember({
@@ -547,7 +549,6 @@ export const article = defineType({
           ],
         }),
       ],
-      validation: (Rule) => Rule.required().min(1),
     }),
     publicationField,
     seoField,
@@ -689,6 +690,7 @@ export const product = defineType({
       type: "string",
       options: {
         list: [
+          "Bundle",
           "Digital guide",
           "Physical",
           "Course",

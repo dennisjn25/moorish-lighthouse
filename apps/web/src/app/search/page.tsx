@@ -7,11 +7,6 @@ export const metadata: Metadata = {
     "Search Moorish Lighthouse lessons, articles, videos, and resources.",
 };
 
-export default async function SiteSearchPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ q?: string }>;
-}) {
-  const params = await searchParams;
-  return <SearchPage query={params.q ?? ""} />;
+export default function SiteSearchPage() {
+  return <SearchPage />;
 }

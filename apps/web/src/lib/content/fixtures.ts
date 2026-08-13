@@ -23,6 +23,12 @@ const civicSource = youtubeSource(
   "The 14th Amendment and Modern Politics",
 );
 
+const ownerApprovedOfferSource: ContentSource = {
+  checkedAt: "2026-08-13",
+  kind: "official",
+  label: "Offer name supplied by the Moorish Lighthouse site owner",
+};
+
 export const previewCatalog: ContentCatalog = {
   mode: "fixtures",
   topics: [
@@ -170,5 +176,82 @@ export const previewCatalog: ContentCatalog = {
     },
   ],
   videos: officialYoutubeVideos,
-  products: [],
+  products: [
+    {
+      audience:
+        "People seeking the Moorish Lighthouse adverse-possession ebook collection. Exact contents and prerequisites are pending owner confirmation.",
+      availability: "coming-soon",
+      fulfillment: "Digital delivery details pending",
+      id: "product-adverse-possession-ebook-bundle",
+      outcomes: [
+        "See the bundle scope before purchase",
+        "Review delivery and access terms",
+        "Confirm price and included materials when checkout is connected",
+      ],
+      slug: "adverse-possession-ebook-bundle",
+      source: ownerApprovedOfferSource,
+      status: "preview",
+      summary:
+        "A dedicated listing for the Adverse Possession ebook Bundle. Contents, price, delivery terms, and checkout remain pending owner approval.",
+      title: "Adverse Possession ebook Bundle",
+      type: "Digital guide",
+    },
+    {
+      audience:
+        "People interested in discussing a child-support matter with Moorish Lighthouse. Professional scope and jurisdictional limits must be confirmed before booking.",
+      availability: "coming-soon",
+      fulfillment: "Scheduling and session details pending",
+      id: "product-child-support-consultation",
+      outcomes: [
+        "Review the consultation scope before booking",
+        "Confirm session format and duration",
+        "Understand that availability does not create legal representation",
+      ],
+      slug: "child-support-consultation",
+      source: ownerApprovedOfferSource,
+      status: "preview",
+      summary:
+        "A dedicated consultation listing. Scope, credentials, price, scheduling, and terms remain pending owner confirmation.",
+      title: "Child Support Consultation",
+      type: "Consultation",
+    },
+    {
+      audience:
+        "People interested in attending Moorish Lighthouse's Child Support Live Class. Dates and learning objectives are pending owner confirmation.",
+      availability: "coming-soon",
+      fulfillment: "Live-class schedule and access details pending",
+      id: "product-child-support-live-class",
+      outcomes: [
+        "See class objectives before enrollment",
+        "Confirm date, duration, and attendance format",
+        "Review replay and cancellation terms when published",
+      ],
+      slug: "child-support-live-class",
+      source: ownerApprovedOfferSource,
+      status: "preview",
+      summary:
+        "A dedicated enrollment listing for the Child Support Live Class. Curriculum, schedule, price, and access terms remain pending owner approval.",
+      title: "Child Support Live Class",
+      type: "Workshop",
+    },
+    {
+      audience:
+        "People interested in the Free From Birth Bundle. Exact contents, intended use, and eligibility are pending owner confirmation.",
+      availability: "coming-soon",
+      fulfillment: "Bundle contents and delivery details pending",
+      id: "product-free-from-birth-bundle",
+      outcomes: [
+        "Review every included item before purchase",
+        "Confirm intended use and delivery format",
+        "See price and terms when checkout is connected",
+      ],
+      slug: "free-from-birth-bundle",
+      source: ownerApprovedOfferSource,
+      status: "preview",
+      summary:
+        "A dedicated listing for the Free From Birth Bundle. Contents, price, fulfillment, and terms remain pending owner approval.",
+      title: "Free From Birth Bundle",
+      type: "Bundle",
+    },
+  ],
 };
