@@ -12,6 +12,7 @@ import {
 } from "@/components/content-ui";
 import { getCatalog, searchCatalog } from "@/lib/content/repository";
 import { VideoThumbnail } from "@/components/video-thumbnail";
+import { VideosLibraryClient } from "@/components/videos-library-client";
 
 export async function LearnHub({
   level = "",
@@ -218,24 +219,8 @@ export async function ArticlesIndex({
   );
 }
 
-export async function VideosLibrary({
-  level = "",
-  query = "",
-  topic = "",
-}: {
-  level?: string;
-  query?: string;
-  topic?: string;
-}) {
+export async function VideosLibrary() {
   const catalog = await getCatalog();
-  const needle = query.toLocaleLowerCase();
-  const videos = catalog.videos.filter(
-    (item) =>
-      (!topic || item.topicSlug === topic) &&
-      (!level || item.level === level) &&
-      (!needle ||
-        `${item.title} ${item.summary}`.toLocaleLowerCase().includes(needle)),
-  );
   const featured = catalog.videos[0];
 
   return (
@@ -279,59 +264,10 @@ export async function VideosLibrary({
 
       <section className="archive-section">
         <Container size="wide">
-          <FilterBar label="Search and filter videos">
-            <Field
-              defaultValue={query}
-              id="video-query"
-              label="Search videos"
-              name="q"
-              placeholder="Search lessons"
-              type="search"
-            />
-            <SelectField defaultValue={topic} label="Topic" name="topic">
-              <option value="">All topics</option>
-              {catalog.topics.map((item) => (
-                <option key={item.id} value={item.slug}>
-                  {item.title}
-                </option>
-              ))}
-            </SelectField>
-            <SelectField defaultValue={level} label="Level" name="level">
-              <option value="">All levels</option>
-              <option>Foundations</option>
-              <option>Developing</option>
-              <option>Advanced</option>
-            </SelectField>
-          </FilterBar>
-          {videos.length ? (
-            <div className="video-grid">
-              {videos.map((item) => (
-                <article key={item.id}>
-                  <div className="video-facade">
-                    <VideoThumbnail
-                      className="video-facade__image"
-                      title={item.title}
-                      youtubeUrl={item.youtubeUrl}
-                    />
-                    <span className="video-facade__play" aria-hidden="true" />
-                    <small>{item.duration}</small>
-                  </div>
-                  <p className="eyebrow">{item.series ?? "Video lesson"}</p>
-                  <h2>
-                    <Link href={`/videos/${item.slug}`}>{item.title}</Link>
-                  </h2>
-                  <p>{item.summary}</p>
-                </article>
-              ))}
-            </div>
-          ) : (
-            <EmptyState
-              actionHref="/videos"
-              actionLabel="View all videos"
-              message="Adjust the search, topic, or level to see another set."
-              title="No videos match."
-            />
-          )}
+          <VideosLibraryClient
+            topics={catalog.topics}
+            videos={catalog.videos}
+          />
         </Container>
       </section>
     </>

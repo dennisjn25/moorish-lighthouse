@@ -183,16 +183,27 @@ export function SelectField({
   defaultValue,
   label,
   name,
+  onChange,
+  value,
 }: {
   children: ReactNode;
   defaultValue?: string;
   label: string;
   name: string;
+  onChange?: (value: string) => void;
+  value?: string;
 }) {
   return (
     <label className="select-field">
       <span>{label}</span>
-      <select defaultValue={defaultValue ?? ""} name={name}>
+      <select
+        defaultValue={value === undefined ? (defaultValue ?? "") : undefined}
+        name={name}
+        onChange={
+          onChange ? (event) => onChange(event.target.value) : undefined
+        }
+        value={value}
+      >
         {children}
       </select>
     </label>

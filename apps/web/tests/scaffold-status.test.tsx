@@ -55,8 +55,13 @@ describe("Premium editorial application shell", () => {
       "Official-channel preview",
     );
     expect(
-      screen.getAllByRole("link", { name: /watch videos/i }).length,
-    ).toBeGreaterThan(0);
+      screen.queryByRole("link", { name: /watch videos/i }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen
+        .getByRole("navigation", { name: "Primary" })
+        .querySelector('a[href="/videos"]'),
+    ).toHaveTextContent("Videos");
     expect(
       screen.getByRole("link", { name: "Enter the video library" }),
     ).toHaveAttribute("href", "/videos");

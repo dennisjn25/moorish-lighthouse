@@ -1,6 +1,8 @@
 import { expect, test } from "@playwright/test";
 import { officialYoutubeVideos } from "../apps/web/src/lib/content/official-youtube";
 
+const videosWithLocalThumbnails = new Set(["O6y-G0E_R-E", "_h51g_HsZHM"]);
+
 test("the video library links every official catalog entry", async ({
   page,
 }) => {
@@ -18,7 +20,9 @@ test("the video library links every official catalog entry", async ({
           return src ? decodeURIComponent(src) : "";
         })
         .toMatch(
-          new RegExp(`/vi/${video.id}/(?:maxresdefault|hqdefault)\\.jpg`),
+          videosWithLocalThumbnails.has(video.id)
+            ? new RegExp(`/video-thumbnails/${video.id}\\.jpg`)
+            : new RegExp(`/vi/${video.id}/(?:maxresdefault|hqdefault)\\.jpg`),
         );
       await expect
         .poll(() => thumbnail.evaluate((image) => image.naturalWidth))

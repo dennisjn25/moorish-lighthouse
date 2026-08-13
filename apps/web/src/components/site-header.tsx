@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { MagnifyingGlass } from "@phosphor-icons/react/dist/ssr";
-import { ButtonLink, Container } from "@/components/ui";
+import { Container } from "@/components/ui";
 import { publicAsset } from "@/lib/public-asset";
 
 const navigation = [
@@ -34,9 +34,6 @@ export function SiteHeader() {
             <MagnifyingGlass aria-hidden="true" size={17} weight="regular" />
             Search
           </Link>
-          <ButtonLink href="/videos" variant="primary">
-            Watch videos
-          </ButtonLink>
         </div>
 
         <details className="mobile-navigation">
@@ -51,7 +48,6 @@ export function SiteHeader() {
             </ul>
             <div className="mobile-navigation__actions">
               <Link href="/search">Search</Link>
-              <ButtonLink href="/videos">Watch videos</ButtonLink>
             </div>
           </nav>
         </details>

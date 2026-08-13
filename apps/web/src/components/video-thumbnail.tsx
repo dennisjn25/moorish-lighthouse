@@ -6,6 +6,9 @@ import {
   getYoutubeThumbnailUrl,
   getYoutubeVideoId,
 } from "@/lib/content/youtube";
+import { publicAsset } from "@/lib/public-asset";
+
+const localThumbnails = new Set(["O6y-G0E_R-E", "_h51g_HsZHM"]);
 
 export function VideoThumbnail({
   className,
@@ -21,6 +24,11 @@ export function VideoThumbnail({
 
   if (!videoId) return null;
 
+  const source = localThumbnails.has(videoId)
+    ? publicAsset(`/video-thumbnails/${videoId}.jpg`)
+    : getYoutubeThumbnailUrl(videoId, useFallback ? "hq" : "max");
+  const isLocalThumbnail = localThumbnails.has(videoId);
+
   return (
     <Image
       alt={`Thumbnail for ${title}`}
@@ -28,7 +36,8 @@ export function VideoThumbnail({
       fill
       onError={() => setUseFallback(true)}
       sizes="(max-width: 760px) 100vw, (max-width: 1200px) 55vw, 800px"
-      src={getYoutubeThumbnailUrl(videoId, useFallback ? "hq" : "max")}
+      src={source}
+      unoptimized={isLocalThumbnail}
     />
   );
 }
