@@ -7,7 +7,7 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   reporter: process.env.CI ? "github" : "list",
   use: {
-    baseURL: "http://127.0.0.1:3000",
+    baseURL: "http://127.0.0.1:3011",
     trace: "on-first-retry",
   },
   projects: [
@@ -18,8 +18,11 @@ export default defineConfig({
   ],
   webServer: {
     command:
-      "npm run dev --workspace @moorish-lighthouse/web -- --hostname 127.0.0.1 --port 3000",
-    url: "http://127.0.0.1:3000",
+      "npm run dev --workspace @moorish-lighthouse/web -- --hostname 127.0.0.1 --port 3011",
+    env: {
+      SANITY_USE_PREVIEW_FIXTURES: "true",
+    },
+    url: "http://127.0.0.1:3011",
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
   },

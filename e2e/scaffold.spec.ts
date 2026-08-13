@@ -8,7 +8,7 @@ test("homepage shell renders without detectable accessibility violations", async
   await expect(
     page.getByRole("heading", {
       level: 1,
-      name: "Find clarity in what matters.",
+      name: "Education for ownership, civics, and nationality.",
     }),
   ).toBeVisible();
 
@@ -47,7 +47,7 @@ test("reduced motion removes meaningful transition duration", async ({
   await page.goto("/");
 
   const duration = await page
-    .getByRole("link", { name: "Start learning", exact: true })
+    .getByRole("link", { name: "Watch videos", exact: true })
     .first()
     .evaluate((element) => getComputedStyle(element).transitionDuration);
 
@@ -74,7 +74,7 @@ for (const viewport of viewports) {
     await expect(
       page.getByRole("heading", {
         level: 1,
-        name: "Find clarity in what matters.",
+        name: "Education for ownership, civics, and nationality.",
       }),
     ).toBeVisible();
     await page.evaluate(() => document.fonts.ready);

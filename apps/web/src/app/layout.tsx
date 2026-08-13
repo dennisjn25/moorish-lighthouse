@@ -24,10 +24,10 @@ export const metadata: Metadata = {
     template: "%s | Moorish Lighthouse",
   },
   description:
-    "Explore education, media, practical resources, and consulting from Moorish Lighthouse.",
+    "Explore Moorish Lighthouse videos on adverse possession, civics, nationality, identity, and public records.",
   openGraph: {
     description:
-      "Explore education, media, practical resources, and consulting from Moorish Lighthouse.",
+      "Explore Moorish Lighthouse videos on adverse possession, civics, nationality, identity, and public records.",
     siteName: "Moorish Lighthouse",
     title: "Moorish Lighthouse",
     type: "website",

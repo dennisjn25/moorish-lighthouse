@@ -2,25 +2,36 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
 const routeFamilies = [
-  ["Home", "/", "Find clarity in what matters."],
+  ["Home", "/", "Education for ownership, civics, and nationality."],
   ["Learn", "/learn", "Build understanding in a clear sequence."],
-  ["Topic", "/learn/foundations", "Foundations"],
+  ["Topic", "/learn/foundations", "Nationality and identity"],
   [
     "Lesson",
     "/learn/foundations/begin-with-a-better-question",
-    "Begin with a better question",
+    "How the channel frames nationality and identity",
   ],
-  ["Articles", "/articles", "Read carefully. Keep the source trail visible."],
-  ["Article", "/articles/build-a-source-trail", "How to build a source trail"],
-  ["Videos", "/videos", "Watch with the context still attached."],
-  ["Video", "/videos/channel-orientation", "Channel lesson orientation"],
-  ["Shop", "/shop", "Useful resources, presented without pressure."],
   [
-    "Product",
-    "/shop/guided-research-workbook",
-    "Digital resource preview slot",
+    "Articles",
+    "/articles",
+    "Read the channel’s core ideas with attribution intact.",
   ],
-  ["About", "/about", "A place for careful learning and informed next steps."],
+  [
+    "Article",
+    "/articles/build-a-source-trail",
+    "Nationality, identity, and application in the official catalog",
+  ],
+  ["Videos", "/videos", "Watch with the context still attached."],
+  [
+    "Video",
+    "/videos/the-truth-about-the-republican-party",
+    "The Truth About The Republican Party",
+  ],
+
+  [
+    "About",
+    "/about",
+    "An author and educator focused on ownership and civic knowledge.",
+  ],
   ["Search", "/search?q=source", "Find a lesson, article, video, or resource."],
 ] as const;
 
@@ -34,7 +45,7 @@ for (const [family, route, heading] of routeFamilies) {
     ).toBeVisible();
     await expect(page.locator("h1")).toHaveCount(1);
     await expect(
-      page.getByText("Local preview content", { exact: true }),
+      page.getByText("Official-channel preview", { exact: true }),
     ).toBeVisible();
   });
 }
@@ -51,36 +62,26 @@ test("filters expose shareable URLs and a useful empty state", async ({
   ).toHaveAttribute("href", "/learn");
 });
 
-test("preview product is explicitly non-transactional", async ({ page }) => {
-  await page.goto("/shop/guided-research-workbook");
-  await expect(
-    page.getByRole("button", { name: "Purchase unavailable" }),
-  ).toBeDisabled();
-  await expect(page.getByText("Not supplied in preview")).toBeVisible();
-});
+for (const route of [
+  "/learn",
+  "/articles/build-a-source-trail",
+  "/videos/the-truth-about-the-republican-party",
 
-test("representative content pages have no detectable axe violations", async ({
-  page,
-}) => {
-  for (const route of [
-    "/learn",
-    "/articles/build-a-source-trail",
-    "/videos/channel-orientation",
-    "/shop/guided-research-workbook",
-    "/about",
-  ]) {
+  "/about",
+]) {
+  test(`${route} has no detectable axe violations`, async ({ page }) => {
     await page.goto(route);
     const results = await new AxeBuilder({ page }).analyze();
     expect(results.violations, route).toEqual([]);
-  }
-});
+  });
+}
 
 const screenshotPages = [
   ["home", "/"],
   ["learn", "/learn"],
   ["articles", "/articles"],
   ["videos", "/videos"],
-  ["shop", "/shop"],
+
   ["about", "/about"],
 ] as const;
 

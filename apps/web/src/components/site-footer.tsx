@@ -6,7 +6,7 @@ const footerGroups = [
   {
     label: "Explore",
     links: [
-      ["Start here", "/#start-learning"],
+      ["Start here", "/videos"],
       ["Learn", "/learn"],
       ["Articles", "/articles"],
       ["Videos", "/videos"],
@@ -16,7 +16,6 @@ const footerGroups = [
     label: "Connect",
     links: [
       ["About", "/about"],
-      ["Consulting", "/consulting"],
       ["Join the Lighthouse", "/#join"],
       ["Contact", "/contact"],
     ],
@@ -24,7 +23,6 @@ const footerGroups = [
   {
     label: "Resources",
     links: [
-      ["Shop", "/shop"],
       ["Search", "/search"],
       ["Accessibility", "/accessibility"],
       ["Policies", "/policies"],
@@ -39,8 +37,8 @@ export function SiteFooter() {
         <div className="site-footer__brand">
           <BrandLogo />
           <p>
-            An education, media, consulting, and commerce platform designed to
-            help people find their next informed step.
+            Official-channel education on adverse possession, civics,
+            nationality, identity, and public records.
           </p>
           <p className="site-footer__note">
             Educational information only. Consulting is not legal
@@ -53,7 +51,7 @@ export function SiteFooter() {
             <h2>{group.label}</h2>
             <ul>
               {group.links.map(([label, href]) => (
-                <li key={href}>
+                <li key={`${label}-${href}`}>
                   <Link href={href}>{label}</Link>
                 </li>
               ))}
@@ -63,7 +61,7 @@ export function SiteFooter() {
       </Container>
       <Container className="site-footer__base" size="wide">
         <p>© Moorish Lighthouse</p>
-        <p>Guidance for the path ahead.</p>
+        <p>Continue at the official source.</p>
       </Container>
     </footer>
   );

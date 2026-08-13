@@ -7,25 +7,25 @@ import type { ContentCatalog } from "@/lib/content/types";
 
 const paths = [
   {
-    href: "/learn",
+    href: "/videos?topic=property-research",
     id: "start-learning",
     index: "01",
-    title: "Learn the foundations",
-    text: "Follow structured introductions to key ideas, terms, and connected lessons.",
+    title: "Study adverse possession",
+    text: "Explore the official presentations on property, home ownership, and adverse possession.",
   },
   {
-    href: "/shop",
+    href: "/videos?topic=civic-context",
     id: "take-action",
     index: "02",
-    title: "Put knowledge to work",
-    text: "Use practical resources and informed guidance to shape a deliberate next step.",
+    title: "Examine civics and politics",
+    text: "Watch the creator’s analysis of amendments, rights, records, taxation, and public institutions.",
   },
   {
-    href: "/articles",
+    href: "/videos?topic=foundations",
     id: "go-deeper",
     index: "03",
-    title: "Study the wider record",
-    text: "Explore articles, videos, references, and longer sequences built around consequential questions.",
+    title: "Explore nationality and identity",
+    text: "Follow the channel’s discussions of Moorish American nationality, identity, and foundational principles.",
   },
 ] as const;
 
@@ -35,23 +35,26 @@ export function HomePage({
   catalog?: ContentCatalog;
 }) {
   const featuredArticle = catalog.articles[0];
+  const featuredVideo = catalog.videos.find(
+    (video) => video.id === "_h51g_HsZHM",
+  );
 
   return (
     <>
       <PreviewNotice />
       <section className="premium-hero">
         <div className="premium-hero__copy">
-          <p className="premium-kicker">
-            Knowledge. Context. Purposeful action.
-          </p>
-          <h1>Find clarity in what matters.</h1>
+          <p className="premium-kicker">Moorish Lighthouse official library</p>
+          <h1>Education for ownership, civics, and nationality.</h1>
           <p className="premium-hero__lede">
-            Lessons, conversations, and practical resources presented with
-            context, discipline, and respect for the source.
+            An author and educator focused on home ownership through adverse
+            possession, with commentary on civics, law, politics, and identity.
           </p>
           <div className="premium-hero__actions">
-            <ButtonLink href="#start-learning">Start learning</ButtonLink>
-            <Link href="/articles">Explore the library</Link>
+            <ButtonLink href="/videos">Explore the videos</ButtonLink>
+            <a href="https://www.youtube.com/@moorishlighthouse">
+              Watch the official channel
+            </a>
           </div>
         </div>
 
@@ -70,10 +73,10 @@ export function HomePage({
 
       <section className="premium-standard">
         <Container size="wide">
-          <p className="premium-section-label">Our standard</p>
+          <p className="premium-section-label">Official channel focus</p>
           <h2>
-            Understanding begins with context, careful sourcing, and a clear
-            next step.
+            Property education is the center. Civic, political, and nationality
+            commentary complete the record.
           </h2>
         </Container>
       </section>
@@ -81,10 +84,10 @@ export function HomePage({
       <section aria-labelledby="path-heading" className="premium-paths">
         <Container size="wide">
           <div className="premium-paths__heading">
-            <h2 id="path-heading">Choose where to begin.</h2>
+            <h2 id="path-heading">Explore the creator’s core subjects.</h2>
             <p>
-              Move through the library according to your purpose. Start with a
-              foundation, apply what you know, or examine the deeper record.
+              These pathways are organized from the public Moorish Lighthouse
+              YouTube catalog and verified Instagram profile.
             </p>
           </div>
 
@@ -115,20 +118,13 @@ export function HomePage({
             />
           </div>
           <div className="premium-feature__copy">
-            <p className="premium-section-label">Featured inquiry</p>
-            <h2>{featuredArticle?.title ?? "How to build a source trail"}</h2>
-            <p>
-              {featuredArticle?.dek ??
-                "A disciplined framework for separating evidence, interpretation, and the next question worth asking."}
-            </p>
+            <p className="premium-section-label">From the official channel</p>
+            <h2>{featuredVideo?.title ?? featuredArticle?.title}</h2>
+            <p>{featuredVideo?.summary ?? featuredArticle?.dek}</p>
             <Link
-              href={
-                featuredArticle
-                  ? `/articles/${featuredArticle.slug}`
-                  : "/articles"
-              }
+              href={featuredVideo ? `/videos/${featuredVideo.slug}` : "/videos"}
             >
-              Read the feature
+              View the presentation
             </Link>
           </div>
         </Container>
@@ -136,13 +132,14 @@ export function HomePage({
 
       <section className="premium-invitation" id="join">
         <Container size="content">
-          <p className="premium-section-label">Continue with purpose</p>
-          <h2>Keep a thoughtful next step within reach.</h2>
+          <p className="premium-section-label">Continue at the source</p>
+          <h2>Watch the full Moorish Lighthouse catalog.</h2>
           <p>
-            Explore sourced lessons, practical resources, and conversations
-            designed to deepen understanding without adding noise.
+            Browse presentations in their original context. Legal and political
+            statements remain attributed to the creator and are not legal
+            advice.
           </p>
-          <ButtonLink href="/learn">Enter the learning library</ButtonLink>
+          <ButtonLink href="/videos">Enter the video library</ButtonLink>
         </Container>
       </section>
     </>

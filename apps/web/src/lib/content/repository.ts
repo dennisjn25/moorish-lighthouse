@@ -12,6 +12,12 @@ import type {
 
 const apiVersion = "2026-08-01";
 
+export function buildSanityHeaders(token?: string): Record<string, string> {
+  return token
+    ? { Accept: "application/json", Authorization: `Bearer ${token}` }
+    : { Accept: "application/json" };
+}
+
 const catalogQuery = `{
   "topics": *[_type == "topic" && publicationStatus == "published" && defined(slug.current)] | order(title asc) {
     "id": _id, title, "slug": slug.current, summary, introduction,
@@ -33,7 +39,7 @@ const catalogQuery = `{
   },
   "videos": *[_type == "video" && publicationStatus == "published" && defined(slug.current)] | order(title asc) {
     "id": _id, title, "slug": slug.current, "topicSlug": topic->slug.current,
-    summary, takeaways, transcript, duration, level, series, youtubeUrl,
+    summary, takeaways, transcript, transcriptEvidence, duration, level, series, youtubeUrl,
     "source": {"kind": "official", "label": "Moorish Lighthouse Sanity Studio", "url": youtubeUrl},
     "status": "published"
   },
@@ -67,7 +73,7 @@ export const getCatalog = cache(async (): Promise<ContentCatalog> => {
 
   try {
     const response = await fetch(endpoint, {
-      headers: { Accept: "application/json" },
+      headers: buildSanityHeaders(process.env.SANITY_API_READ_TOKEN),
       next: { revalidate: 300 },
     });
     if (!response.ok) return previewCatalog;

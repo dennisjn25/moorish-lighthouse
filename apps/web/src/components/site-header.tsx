@@ -7,8 +7,6 @@ const navigation = [
   { href: "/learn", label: "Learn" },
   { href: "/articles", label: "Articles" },
   { href: "/videos", label: "Videos" },
-  { href: "/shop", label: "Shop" },
-  { href: "/consulting", label: "Consulting" },
   { href: "/about", label: "About" },
 ] as const;
 
@@ -33,8 +31,8 @@ export function SiteHeader() {
             <MagnifyingGlass aria-hidden="true" size={17} weight="regular" />
             Search
           </Link>
-          <ButtonLink href="/#start-learning" variant="primary">
-            Start learning
+          <ButtonLink href="/videos" variant="primary">
+            Watch videos
           </ButtonLink>
         </div>
 
@@ -50,7 +48,7 @@ export function SiteHeader() {
             </ul>
             <div className="mobile-navigation__actions">
               <Link href="/search">Search</Link>
-              <ButtonLink href="/#start-learning">Start learning</ButtonLink>
+              <ButtonLink href="/videos">Watch videos</ButtonLink>
             </div>
           </nav>
         </details>
@@ -65,7 +63,7 @@ export function BrandLogo() {
       <span aria-hidden="true" className="brand-logo__mark" />
       <span className="brand-logo__wordmark">
         <strong>Moorish Lighthouse</strong>
-        <small>Education and media</small>
+        <small>Author and educator</small>
       </span>
     </Link>
   );

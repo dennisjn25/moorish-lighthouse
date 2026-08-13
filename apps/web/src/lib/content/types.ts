@@ -56,6 +56,10 @@ export type Video = {
   summary: string;
   takeaways: string[];
   transcript?: string[];
+  transcriptEvidence?: Array<{
+    timestamp: string;
+    text: string;
+  }>;
   duration: string;
   level: LearningLevel;
   series?: string;

@@ -4,6 +4,6 @@ import { AboutPage } from "@/components/content-hubs";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Learn about the Moorish Lighthouse mission and editorial commitments.",
+    "Learn about the official Moorish Lighthouse education and media catalog.",
 };
 export default AboutPage;

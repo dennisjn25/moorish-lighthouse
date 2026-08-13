@@ -365,7 +365,12 @@
 }
 .video-grid article {
   border-bottom: 1px solid var(--color-border);
+  min-width: 0;
   padding-bottom: var(--space-8);
+}
+.video-feature__grid > *,
+.video-grid > * {
+  min-width: 0;
 }
 .video-grid article:nth-child(even) {
   margin-top: var(--space-20);
@@ -375,7 +380,9 @@
   margin: var(--space-3) 0;
 }
 .video-grid h2 a {
+  overflow-wrap: anywhere;
   text-decoration: none;
+  word-break: normal;
 }
 .video-grid .eyebrow {
   margin-top: var(--space-5);

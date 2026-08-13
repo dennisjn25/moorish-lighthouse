@@ -34,8 +34,8 @@ export async function LearnHub({
         title="Build understanding in a clear sequence."
       >
         <p>
-          Begin with a topic, choose your current level, and move through
-          lessons that keep context and sources close at hand.
+          Begin with a channel subject, then use the attributed guides and
+          original presentations to follow the creator’s framework in context.
         </p>
       </PageIntro>
 
@@ -128,11 +128,11 @@ export async function ArticlesIndex({
       <PageIntro
         breadcrumbs={[{ href: "/", label: "Home" }, { label: "Articles" }]}
         eyebrow="Editorial archive"
-        title="Read carefully. Keep the source trail visible."
+        title="Read the channel’s core ideas with attribution intact."
       >
         <p>
-          Essays and explainers organized for sustained reading, with context,
-          references, and the next related lesson.
+          Transcript-grounded editorial guides that summarize the creator’s
+          recurring themes and link back to the official presentation.
         </p>
       </PageIntro>
 
@@ -245,8 +245,9 @@ export async function VideosLibrary({
         title="Watch with the context still attached."
       >
         <p>
-          Search lessons by subject and level. Every video page leaves room for
-          a summary, key takeaways, an approved transcript, and a next step.
+          Search the official catalog by subject and level. Every video page
+          includes an attributed summary, key takeaways, reviewed transcript
+          excerpts, and the original YouTube source.
         </p>
       </PageIntro>
 
@@ -431,11 +432,12 @@ export async function AboutPage() {
       <PageIntro
         breadcrumbs={[{ href: "/", label: "Home" }, { label: "About" }]}
         eyebrow="About Moorish Lighthouse"
-        title="A place for careful learning and informed next steps."
+        title="An author and educator focused on ownership and civic knowledge."
       >
         <p>
-          The final story, educator biography, credentials, portraits, and
-          impact claims require owner-supplied, verified source material.
+          The verified official profile identifies Moorish Lighthouse as an
+          author and educator helping everyday people explore home ownership
+          through adverse possession.
         </p>
       </PageIntro>
       <section className="about-story">
@@ -445,18 +447,19 @@ export async function AboutPage() {
             variant="interior"
           />
           <div>
-            <p className="eyebrow">The mission</p>
+            <p className="eyebrow">The public work</p>
             <h2>
-              Bring the lesson, the source, and the next step into one light.
+              Property education, civic analysis, and Moorish American identity.
             </h2>
             <p>
-              Moorish Lighthouse is being shaped as an owned home for education,
-              media, resources, and educational consulting. It should help new
-              visitors orient themselves without flattening complex questions.
+              The official YouTube catalog examines adverse possession, property
+              taxation, constitutional interpretation, public records,
+              nationality, identity, and related political questions.
             </p>
             <p>
-              This local preview deliberately avoids inventing a founder story,
-              credentials, publications, testimonials, or community metrics.
+              This site presents those views as the creator’s educational
+              commentary. Rights-affecting decisions require qualified local
+              professional guidance.
             </p>
           </div>
         </Container>
@@ -496,13 +499,13 @@ export async function AboutPage() {
           </div>
           <div className="button-group">
             <ButtonLink
-              href="https://www.youtube.com/@MoorishLighthouse"
+              href="https://www.youtube.com/@moorishlighthouse"
               variant="secondary"
             >
               Official YouTube
             </ButtonLink>
             <ButtonLink
-              href="https://www.instagram.com/moorishlighthouse/"
+              href="https://www.instagram.com/moorishlighthouse_official/"
               variant="secondary"
             >
               Official Instagram

@@ -33,6 +33,12 @@ describe("Daylight Beacon application shell", () => {
     expect(
       screen.getAllByRole("link", { name: "Moorish Lighthouse home" }),
     ).toHaveLength(2);
+    expect(
+      screen.queryByRole("link", { name: "Shop" }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("link", { name: "Consulting" }),
+    ).not.toBeInTheDocument();
   });
 
   it("renders the approved premium editorial hero and three purposeful paths", () => {
@@ -42,22 +48,28 @@ describe("Daylight Beacon application shell", () => {
     expect(
       screen.getByRole("heading", {
         level: 1,
-        name: "Find clarity in what matters.",
+        name: "Education for ownership, civics, and nationality.",
       }),
     ).toBeVisible();
+    expect(
+      screen.getByText(/author and educator focused on home ownership/i),
+    ).toBeVisible();
+    expect(
+      screen.getByRole("link", { name: /watch the official channel/i }),
+    ).toHaveAttribute("href", "https://www.youtube.com/@moorishlighthouse");
     expect(
       screen.getByRole("img", {
         name: "Lighthouse casting a warm beam over a calm coast at blue hour",
       }),
     ).toBeVisible();
     expect(
-      screen.getByRole("heading", { name: "Learn the foundations" }),
+      screen.getByRole("heading", { name: "Study adverse possession" }),
     ).toBeVisible();
     expect(
-      screen.getByRole("heading", { name: "Put knowledge to work" }),
+      screen.getByRole("heading", { name: "Examine civics and politics" }),
     ).toBeVisible();
     expect(
-      screen.getByRole("heading", { name: "Study the wider record" }),
+      screen.getByRole("heading", { name: "Explore nationality and identity" }),
     ).toBeVisible();
   });
 

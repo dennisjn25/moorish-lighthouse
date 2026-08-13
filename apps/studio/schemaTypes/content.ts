@@ -627,6 +627,38 @@ export const video = defineType({
       type: "array",
       of: [defineArrayMember({ type: "block" })],
     }),
+    defineField({
+      name: "transcriptEvidence",
+      title: "Reviewed transcript excerpts",
+      description:
+        "Short, timestamped excerpts checked against the official transcript. Do not paste full transcripts here.",
+      type: "array",
+      of: [
+        defineArrayMember({
+          name: "transcriptExcerpt",
+          type: "object",
+          fields: [
+            defineField({
+              name: "timestamp",
+              title: "Timestamp",
+              type: "string",
+              validation: (Rule) =>
+                Rule.required().regex(/^\d{1,2}:\d{2}(?::\d{2})?$/, {
+                  name: "video timestamp",
+                }),
+            }),
+            defineField({
+              name: "text",
+              title: "Verbatim excerpt",
+              type: "text",
+              rows: 3,
+              validation: (Rule) => Rule.required().max(180),
+            }),
+          ],
+        }),
+      ],
+      validation: (Rule) => Rule.max(6),
+    }),
     publicationField,
     seoField,
   ],

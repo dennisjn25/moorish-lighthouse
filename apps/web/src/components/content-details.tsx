@@ -208,7 +208,7 @@ export async function LessonDetail({ slug }: { slug: string }) {
             <div className="reading-meta">
               <span>{lesson.minutes} minute read</span>
               <span>{topic?.title}</span>
-              <span>Preview lesson</span>
+              <span>Official-channel study guide</span>
             </div>
           </Container>
         </header>
@@ -237,11 +237,10 @@ export async function LessonDetail({ slug }: { slug: string }) {
               </section>
             ))}
             <aside className="disclaimer">
-              <strong>Educational preview</strong>
+              <strong>Attributed educational guide</strong>
               <p>
-                This local fixture demonstrates presentation only. It is not
-                legal advice and has not been approved as Moorish Lighthouse
-                instruction.
+                This guide summarizes Moorish Lighthouse’s presentation. It does
+                not independently validate legal claims and is not legal advice.
               </p>
             </aside>
             <SourceNote source={lesson.source} />
@@ -306,7 +305,7 @@ export async function ArticleDetail({ slug }: { slug: string }) {
             <div className="reading-meta">
               <span>{article.author}</span>
               <span>{article.minutes} min read</span>
-              <span>Local preview</span>
+              <span>Official-channel editorial guide</span>
             </div>
           </Container>
         </header>
@@ -320,8 +319,8 @@ export async function ArticleDetail({ slug }: { slug: string }) {
           <aside className="article-aside">
             <strong>Article note</strong>
             <p>
-              References and dates are required for published work. This fixture
-              is intentionally marked as preview.
+              This guide remains attributed to the creator. Follow the linked
+              official video for the full presentation and cited context.
             </p>
           </aside>
           <div className="prose prose--article">
@@ -469,21 +468,25 @@ export async function VideoDetail({ slug }: { slug: string }) {
               <h2>Read or return to a specific point.</h2>
             </div>
             <p>
-              Production transcripts must be authorized, accurate, and reviewed
-              before publication.
+              These short excerpts were reviewed against the public YouTube
+              transcript. Auto-generated captions can contain errors; use the
+              official video as the primary source.
             </p>
           </div>
-          {video.transcript?.length ? (
+          {video.transcriptEvidence?.length ? (
             <div className="transcript">
-              {video.transcript.map((paragraph, index) => (
-                <p key={paragraph}>
-                  <span>{String(index).padStart(2, "0")}:00</span>
-                  {paragraph}
+              {video.transcriptEvidence.map((evidence) => (
+                <p key={`${evidence.timestamp}-${evidence.text}`}>
+                  <span>{evidence.timestamp}</span>
+                  {evidence.text}
                 </p>
               ))}
             </div>
           ) : (
-            <p>No transcript is available for this entry.</p>
+            <p>
+              No reviewed transcript excerpt is available for this entry. Watch
+              the official video for the creator’s full presentation.
+            </p>
           )}
         </Container>
       </section>

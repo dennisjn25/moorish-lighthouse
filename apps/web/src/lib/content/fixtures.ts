@@ -1,17 +1,27 @@
 import type { ContentCatalog, ContentSource } from "./types";
+import { officialYoutubeVideos } from "./official-youtube";
 
-const previewSource: ContentSource = {
-  kind: "preview",
-  label:
-    "Deterministic local preview content. Replace in Sanity before launch.",
-};
+function youtubeSource(videoId: string, title: string): ContentSource {
+  return {
+    checkedAt: "2026-08-12",
+    kind: "official",
+    label: `Moorish Lighthouse official YouTube video: ${title}`,
+    url: `https://www.youtube.com/watch?v=${videoId}`,
+  };
+}
 
-const youtubeSource: ContentSource = {
-  checkedAt: "2026-08-10",
-  kind: "official",
-  label: "Moorish Lighthouse official YouTube channel",
-  url: "https://www.youtube.com/@MoorishLighthouse",
-};
+const nationalitySource = youtubeSource(
+  "_h51g_HsZHM",
+  "Moorish American: How to Nationalize, operate as a National, and Fundamental Principles of Law.",
+);
+const propertySource = youtubeSource(
+  "ZNAjhmZJ_BQ",
+  "How To: Adverse Possession",
+);
+const civicSource = youtubeSource(
+  "L25wfLXytYE",
+  "The 14th Amendment and Modern Politics",
+);
 
 export const previewCatalog: ContentCatalog = {
   mode: "fixtures",
@@ -19,227 +29,146 @@ export const previewCatalog: ContentCatalog = {
     {
       id: "topic-foundations",
       introduction:
-        "Build a reliable vocabulary, separate questions from assumptions, and learn how to evaluate a source before drawing a conclusion.",
+        "Follow Moorish Lighthouse presentations about Moorish American nationality, identity, study, documentation, and applying the creator’s stated principles in civic situations.",
       slug: "foundations",
-      source: previewSource,
-      status: "preview",
+      source: nationalitySource,
+      status: "published",
       summary:
-        "Orientation, vocabulary, source literacy, and careful first steps.",
-      title: "Foundations",
+        "An attributed path through the channel’s nationality and identity presentations.",
+      title: "Nationality and identity",
     },
     {
       id: "topic-property",
       introduction:
-        "Explore how to organize property research questions, identify the public records that may matter, and know when qualified local guidance is essential.",
+        "Study Moorish Lighthouse presentations on adverse possession, abandoned-property research, public records, possession requirements, carrying costs, and jurisdiction-specific procedure.",
       slug: "property-research",
-      source: previewSource,
-      status: "preview",
+      source: propertySource,
+      status: "published",
       summary:
-        "A research-first approach to property records and local processes.",
-      title: "Property research",
+        "The channel’s property research and adverse-possession presentations, with legal boundaries visible.",
+      title: "Property and adverse possession",
     },
     {
       id: "topic-civic",
       introduction:
-        "Read civic systems with context by tracing terms, institutions, and primary sources rather than relying on isolated claims.",
+        "Examine Moorish Lighthouse commentary on constitutional interpretation, citizenship, rights, public institutions, taxation, records, and modern politics.",
       slug: "civic-context",
-      source: previewSource,
-      status: "preview",
-      summary: "Primary-source habits for civic and historical questions.",
-      title: "Civic context",
+      source: civicSource,
+      status: "published",
+      summary:
+        "Attributed civic and political commentary from the official channel.",
+      title: "Civics and public systems",
     },
   ],
   lessons: [
     {
       body: [
-        "A useful inquiry begins with a question narrow enough to investigate. Write down what you know, what you assume, and what would change your mind.",
-        "Next, identify the original source behind each claim. Prefer statutes, recorded documents, public agency guidance, archival material, and qualified professional interpretation over unsourced summaries.",
-        "This preview demonstrates the lesson format. It is educational information, not legal advice, and must be replaced or approved before publication.",
+        "Moorish Lighthouse distinguishes the creator’s claimed Moorish American nationality from U.S. citizenship and argues that inherited racial labels do not express nationality.",
+        "Across the channel’s presentations, the creator repeatedly connects identity claims with study, documentation, and the ability to explain the principles being asserted.",
+        "This guide summarizes the creator’s position. It does not independently validate nationality, jurisdiction, or legal-status claims; consult qualified local guidance before making rights-affecting decisions.",
       ],
-      format: "Lesson",
-      id: "lesson-question",
+      format: "Guide",
+      id: "lesson-nationality",
       level: "Foundations",
-      minutes: 7,
+      minutes: 8,
       slug: "begin-with-a-better-question",
-      source: previewSource,
-      status: "preview",
+      source: nationalitySource,
+      status: "published",
       summary:
-        "A simple method for turning a broad concern into a researchable question.",
-      title: "Begin with a better question",
+        "A transcript-grounded orientation to how Moorish Lighthouse frames nationality, identity, study, and documentation.",
+      title: "How the channel frames nationality and identity",
       topicSlug: "foundations",
     },
     {
       body: [
-        "Public records are created for different purposes. A deed, tax record, court filing, and parcel map may describe related facts without answering the same question.",
-        "Record the office, document type, date, jurisdiction, and any identifier. These details make later verification possible.",
-        "Procedures and legal effects vary by jurisdiction. Use qualified local professionals when a decision could affect rights, money, or deadlines.",
+        "Moorish Lighthouse describes adverse possession as a state-specific doctrine and directs viewers toward abandoned-property research rather than actively occupied or clearly claimed property.",
+        "The presentations discuss ownership and tax records, vacancy, possession, repairs, utilities, code compliance, carrying costs, statutory periods, and possible quiet-title proceedings.",
+        "The creator’s examples and testimonials are educational commentary, not a guarantee or legal instruction. Property rights and procedures vary by jurisdiction and require qualified local review.",
       ],
       format: "Guide",
-      id: "lesson-records",
+      id: "lesson-property",
       level: "Foundations",
-      minutes: 11,
+      minutes: 10,
       slug: "map-the-public-record",
-      source: previewSource,
-      status: "preview",
+      source: propertySource,
+      status: "published",
       summary:
-        "Understand what a record can show before treating it as an answer.",
-      title: "Map the public record",
+        "A study map for the records, costs, possession questions, and jurisdictional limits discussed in the official videos.",
+      title: "Map the channel’s adverse-possession research process",
       topicSlug: "property-research",
     },
     {
       body: [
-        "Start by preserving the language used in the original source. Modern summaries can flatten distinctions that mattered in their own time.",
-        "Compare the source with contemporary records and reputable scholarship. Note disagreement rather than forcing certainty.",
-        "A strong research trail makes interpretation visible: source, context, inference, and remaining question.",
+        "Moorish Lighthouse argues that the 14th Amendment reshaped citizenship and the balance between state and federal power, then connects that interpretation to current political disputes.",
+        "The channel also distinguishes civil rights created or regulated by law from what it describes as inherent rights, applying that distinction to reproductive-rights and right-to-travel commentary.",
+        "These are attributed interpretations from the creator’s presentations. Constitutional and legal conclusions should be checked against primary sources and qualified professional analysis.",
       ],
       format: "Lesson",
-      id: "lesson-context",
+      id: "lesson-civics",
       level: "Developing",
       minutes: 9,
       slug: "read-a-source-in-context",
-      source: previewSource,
-      status: "preview",
+      source: civicSource,
+      status: "published",
       summary:
-        "Keep source, context, and interpretation in their proper places.",
-      title: "Read a source in context",
+        "An attributed guide to recurring claims about citizenship, rights, and federal-state power in the channel’s civic commentary.",
+      title: "Trace the channel’s civic framework",
       topicSlug: "civic-context",
     },
   ],
   articles: [
     {
-      author: "Moorish Lighthouse editorial preview",
+      author: "Moorish Lighthouse editorial guide",
       body: [
-        "The fastest answer is not always the most useful one. A dependable research process begins by defining the question and finding the authority that can answer it.",
-        "Separate what the source states from what you infer. Then record where the source came from, when you accessed it, and whether a newer version exists.",
-        "This article is local preview copy created to exercise the editorial template. It is not a published Moorish Lighthouse article.",
+        "Moorish Lighthouse’s long-form nationality presentation connects identity, documentation, study, employment, and courtroom encounters. The creator argues that a nationality claim must be understood and applied rather than repeated as a label.",
+        "Related channel videos critique Black and Negro as identity terms and present Moorish American nationality as the preferred framework. Those claims are the creator’s interpretation and are not independently validated here.",
+        "Use the linked official presentation and reviewed timestamps as the source record. Questions involving citizenship, jurisdiction, identification, or legal status require qualified professional advice.",
       ],
-      dek: "A compact framework for distinguishing evidence, interpretation, and the next question.",
-      id: "article-source-trail",
+      dek: "A transcript-grounded map of the creator’s recurring nationality and identity themes.",
+      id: "article-nationality",
       minutes: 6,
-      references: [previewSource],
+      references: [nationalitySource],
       slug: "build-a-source-trail",
-      source: previewSource,
-      status: "preview",
-      title: "How to build a source trail",
+      source: nationalitySource,
+      status: "published",
+      title: "Nationality, identity, and application in the official catalog",
       topicSlug: "foundations",
     },
     {
-      author: "Moorish Lighthouse editorial preview",
+      author: "Moorish Lighthouse editorial guide",
       body: [
-        "A public record is evidence created within a particular system. Its meaning depends on the document, jurisdiction, date, and question being asked.",
-        "Begin with the issuing office and document type. Preserve identifiers and request certified or complete copies when the stakes require it.",
-        "This preview does not interpret any specific property record or provide legal guidance.",
+        "Across several presentations and testimonials, Moorish Lighthouse frames adverse possession as a possible nontraditional path into property while emphasizing research into vacancy, ownership, taxes, possession, and state procedure.",
+        "Guests describe stamped paperwork, maintenance, repair budgets, utilities, taxes, and competing claims. Their accounts are personal reports, not verified guarantees of title or outcomes.",
+        "Before acting, compare the creator’s presentation with current statutes, court decisions, local records, and qualified advice in the property’s jurisdiction.",
       ],
-      dek: "Five details to capture before relying on a record or repeating a claim.",
-      id: "article-records",
+      dek: "What the official videos repeatedly ask viewers to research before approaching an adverse-possession question.",
+      id: "article-property",
       minutes: 8,
-      references: [previewSource],
+      references: [propertySource],
       slug: "before-you-rely-on-a-public-record",
-      source: previewSource,
-      status: "preview",
-      title: "Before you rely on a public record",
+      source: propertySource,
+      status: "published",
+      title: "What the channel examines before an adverse-possession claim",
       topicSlug: "property-research",
     },
     {
-      author: "Moorish Lighthouse editorial preview",
+      author: "Moorish Lighthouse editorial guide",
       body: [
-        "Historical terms can shift across institutions, places, and periods. Searching only a modern phrase may hide the language used by the people who created the record.",
-        "Track alternative terms, dates, and institutional names. Keep a note of where each term appears and how its meaning changes.",
-        "This is template content for local preview and requires editorial review before publication.",
+        "Moorish Lighthouse uses the 14th Amendment as a central lens for discussing citizenship, federal power, abortion politics, and presidential eligibility.",
+        "Other videos extend the channel’s civic framework to property taxation, reproductive rights, and the distinction it draws between travel and commercial driving.",
+        "These presentations contain disputed legal and historical interpretations. Follow the linked videos, inspect the primary authorities cited, and seek qualified analysis before relying on a conclusion.",
       ],
-      dek: "Why vocabulary, date, and institution belong beside every historical source.",
-      id: "article-language",
+      dek: "A guide to the constitutional, rights, and public-system themes repeated across the official channel.",
+      id: "article-civics",
       minutes: 7,
-      references: [previewSource],
+      references: [civicSource],
       slug: "language-changes-the-search",
-      source: previewSource,
-      status: "preview",
-      title: "Language changes the search",
+      source: civicSource,
+      status: "published",
+      title: "The channel’s civic lens: citizenship, rights, and public power",
       topicSlug: "civic-context",
     },
   ],
-  videos: [
-    {
-      duration: "Preview runtime",
-      id: "video-channel-orientation",
-      level: "Foundations",
-      series: "Start here",
-      slug: "channel-orientation",
-      source: youtubeSource,
-      status: "preview",
-      summary:
-        "A local preview entry showing how an official Moorish Lighthouse video can be presented with context, attribution, and a transcript area.",
-      takeaways: [
-        "Identify the central question before watching",
-        "Keep linked sources beside your notes",
-        "Continue with a related lesson rather than a dead end",
-      ],
-      title: "Channel lesson orientation",
-      topicSlug: "foundations",
-      transcript: [
-        "Transcript placeholder. Import only an authorized caption file or an editor-approved transcript.",
-      ],
-      youtubeUrl: "https://www.youtube.com/@MoorishLighthouse",
-    },
-    {
-      duration: "Preview runtime",
-      id: "video-property-notes",
-      level: "Developing",
-      series: "Research practice",
-      slug: "organize-property-research-notes",
-      source: youtubeSource,
-      status: "preview",
-      summary:
-        "A preview video record for demonstrating topic, level, series, transcript, and related-content presentation.",
-      takeaways: [
-        "Record jurisdiction and document identifiers",
-        "Distinguish facts from interpretations",
-        "Escalate rights-affecting decisions to qualified local guidance",
-      ],
-      title: "Organize property research notes",
-      topicSlug: "property-research",
-      transcript: [
-        "Transcript placeholder. The production entry must use approved text tied to the selected official video.",
-      ],
-      youtubeUrl: "https://www.youtube.com/@MoorishLighthouse",
-    },
-  ],
-  products: [
-    {
-      audience:
-        "Visitors who want an editor-approved, structured starting resource.",
-      availability: "coming-soon",
-      fulfillment:
-        "Delivery details are pending owner-approved catalog information.",
-      id: "product-guide-slot",
-      outcomes: [
-        "Production outcomes will be supplied by the owner",
-        "No price or purchase claim is shown in preview mode",
-      ],
-      slug: "guided-research-workbook",
-      source: previewSource,
-      status: "preview",
-      summary:
-        "Reserved catalog template for a possible digital resource. This is not a real product listing.",
-      title: "Digital resource preview slot",
-      type: "Digital guide",
-    },
-    {
-      audience: "Visitors considering a future live educational session.",
-      availability: "unavailable",
-      fulfillment: "Schedule, access method, and terms have not been approved.",
-      id: "product-workshop-slot",
-      outcomes: [
-        "Demonstrates workshop presentation without inventing an offer",
-        "Checkout remains unavailable until an approved product exists",
-      ],
-      slug: "live-workshop-placeholder",
-      source: previewSource,
-      status: "preview",
-      summary:
-        "Reserved template for an owner-approved workshop. No event, seat, date, or price is implied.",
-      title: "Workshop preview slot",
-      type: "Workshop",
-    },
-  ],
+  videos: officialYoutubeVideos,
+  products: [],
 };

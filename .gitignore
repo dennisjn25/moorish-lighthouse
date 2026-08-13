@@ -19,3 +19,6 @@ artifacts/**/*.jpeg
 artifacts/**/*.webp
 artifacts/**/*.html
 artifacts/**/*.json
+
+# Local transcript-fetching environment and raw caption evidence.
+.venv-transcripts/

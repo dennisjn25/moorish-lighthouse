@@ -8,11 +8,11 @@ export function PreviewNotice() {
   return (
     <div className="preview-notice" role="status">
       <Container size="wide">
-        <strong>Local preview content</strong>
+        <strong>Official-channel preview</strong>
         <span>
-          These deterministic fixtures exercise every page without live Sanity
-          credentials. They are not published claims, products, prices, or
-          offers.
+          Educational summaries are grounded in official Moorish Lighthouse
+          videos and remain attributed to the creator. They are not legal
+          advice.
         </span>
       </Container>
     </div>
@@ -133,7 +133,7 @@ export function ContentTile({
         <p>{summary}</p>
       </div>
       <footer>
-        {meta ? <span>{meta}</span> : <span>Preview content</span>}
+        {meta ? <span>{meta}</span> : <span>Official-channel guide</span>}
         <Link className="text-link" href={href}>
           Open <span aria-hidden="true">→</span>
         </Link>

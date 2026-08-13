@@ -30,17 +30,17 @@ describe("Premium editorial application shell", () => {
     expect(screen.getByRole("contentinfo")).toBeInTheDocument();
     expect(
       screen.getByRole("heading", {
-        name: "Find clarity in what matters.",
+        name: "Education for ownership, civics, and nationality.",
       }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("heading", { name: "Learn the foundations" }),
+      screen.getByRole("heading", { name: "Study adverse possession" }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("heading", { name: "Put knowledge to work" }),
+      screen.getByRole("heading", { name: "Examine civics and politics" }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("heading", { name: "Study the wider record" }),
+      screen.getByRole("heading", { name: "Explore nationality and identity" }),
     ).toBeInTheDocument();
   });
 
@@ -48,14 +48,14 @@ describe("Premium editorial application shell", () => {
     renderShell();
 
     expect(screen.getByRole("status")).toHaveTextContent(
-      "Local preview content",
+      "Official-channel preview",
     );
     expect(
-      screen.getAllByRole("link", { name: /start learning/i }).length,
+      screen.getAllByRole("link", { name: /watch videos/i }).length,
     ).toBeGreaterThan(0);
     expect(
-      screen.getByRole("link", { name: "Enter the learning library" }),
-    ).toHaveAttribute("href", "/learn");
+      screen.getByRole("link", { name: "Enter the video library" }),
+    ).toHaveAttribute("href", "/videos");
     expect(
       screen.queryByRole("button", { name: "Join when available" }),
     ).not.toBeInTheDocument();

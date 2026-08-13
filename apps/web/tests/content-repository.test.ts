@@ -1,36 +1,78 @@
 import { describe, expect, it } from "vitest";
 import { previewCatalog } from "@/lib/content/fixtures";
-import { searchCatalog } from "@/lib/content/repository";
+import { buildSanityHeaders, searchCatalog } from "@/lib/content/repository";
 
-describe("preview content repository", () => {
-  it("labels every local fixture and avoids transactional product data", () => {
+describe("content repository", () => {
+  it("uses the official Moorish Lighthouse channels for the preview video library", () => {
+    expect(previewCatalog.videos).toHaveLength(20);
+    expect(previewCatalog.videos[0]).toMatchObject({
+      id: "aCfayznQ7hQ",
+      source: {
+        kind: "official",
+        url: "https://www.youtube.com/@moorishlighthouse",
+      },
+      title: "The Truth About The Republican Party",
+      youtubeUrl: "https://www.youtube.com/watch?v=aCfayznQ7hQ",
+    });
+    const firstVideo = previewCatalog.videos[0];
+    expect(firstVideo).toBeDefined();
+    expect(firstVideo?.transcriptEvidence).toHaveLength(3);
+    expect(firstVideo?.transcriptEvidence?.[0]).toEqual({
+      text: expect.any(String),
+      timestamp: expect.stringMatching(/^\d{1,2}:\d{2}/),
+    });
+    expect(previewCatalog.videos.at(-1)).toMatchObject({
+      id: "_h51g_HsZHM",
+      title:
+        "Moorish American: How to Nationalize, operate as a National, and Fundamental Principles of Law.",
+    });
+    expect(
+      previewCatalog.videos.every((video) => video.status === "published"),
+    ).toBe(true);
+  });
+
+  it("grounds every educational fixture in an official Moorish Lighthouse video", () => {
     expect(previewCatalog.mode).toBe("fixtures");
-    expect(previewCatalog.topics.length).toBeGreaterThan(0);
-    expect(previewCatalog.lessons.length).toBeGreaterThan(0);
-    expect(previewCatalog.articles.length).toBeGreaterThan(0);
-    expect(previewCatalog.videos.length).toBeGreaterThan(0);
-    expect(previewCatalog.products.length).toBeGreaterThan(0);
+    expect(previewCatalog.topics).toHaveLength(3);
+    expect(previewCatalog.lessons).toHaveLength(3);
+    expect(previewCatalog.articles).toHaveLength(3);
+    expect(previewCatalog.products).toHaveLength(0);
 
     for (const item of [
       ...previewCatalog.topics,
       ...previewCatalog.lessons,
       ...previewCatalog.articles,
-      ...previewCatalog.videos,
-      ...previewCatalog.products,
     ]) {
-      expect(item.status).toBe("preview");
+      expect(item.status).toBe("published");
+      expect(item.source).toMatchObject({
+        kind: "official",
+        url: expect.stringMatching(
+          /^https:\/\/(www\.)?youtube\.com\/watch\?v=/,
+        ),
+      });
     }
 
-    for (const product of previewCatalog.products) {
-      expect(product.availability).not.toBe("available");
-      expect(JSON.stringify(product)).not.toMatch(
-        /\$\d|priceId|paymentIntent/i,
+    for (const item of [
+      ...previewCatalog.lessons,
+      ...previewCatalog.articles,
+    ]) {
+      expect(JSON.stringify(item)).toMatch(/Moorish Lighthouse/i);
+      expect(JSON.stringify(item)).not.toMatch(
+        /preview slot|better question|source trail/i,
       );
     }
   });
 
+  it("adds a server-only bearer token for private Sanity datasets", () => {
+    expect(buildSanityHeaders()).toEqual({ Accept: "application/json" });
+    expect(buildSanityHeaders("viewer-secret")).toEqual({
+      Accept: "application/json",
+      Authorization: "Bearer viewer-secret",
+    });
+  });
+
   it("organizes cross-content search results by truthful content type", async () => {
-    const results = await searchCatalog("source");
+    const results = await searchCatalog("nationality");
     expect(results.length).toBeGreaterThan(0);
     expect(results.every((item) => item.href.startsWith("/"))).toBe(true);
     expect(new Set(results.map((item) => item.kind)).size).toBeGreaterThan(1);
