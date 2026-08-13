@@ -1032,9 +1032,16 @@ body {
 }
 
 .site-header {
-  background: color-mix(in srgb, var(--color-canvas) 94%, transparent);
+  background: var(--color-canvas);
   border-bottom-color: var(--color-border);
-  backdrop-filter: blur(16px);
+  backdrop-filter: none;
+  inset: 0 0 auto;
+  position: fixed;
+  width: 100%;
+}
+
+body {
+  padding-top: 4.875rem;
 }
 
 .site-header::before,
