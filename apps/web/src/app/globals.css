@@ -140,30 +140,17 @@ h3 {
 }
 
 .brand-logo__mark {
-  background: var(--color-deep-ocean);
-  border: 1px solid rgb(255 255 255 / 16%);
-  border-radius: 50%;
-  box-shadow: 0 10px 26px rgb(0 0 0 / 32%);
-  display: grid;
-  height: 3.5rem;
-  overflow: hidden;
-  place-items: center;
-  position: relative;
-  width: 3.5rem;
-}
-
-.brand-logo__mark::after {
-  background: var(--brand-spectrum);
-  content: "";
-  height: 2px;
-  inset: auto 15% 4px;
-  position: absolute;
+  display: block;
+  flex: 0 0 auto;
+  height: 3.75rem;
+  line-height: 0;
+  width: 3.75rem;
 }
 
 .brand-logo__mark img {
+  display: block;
   height: 100%;
-  object-fit: cover;
-  transform: scale(1.08);
+  object-fit: contain;
   width: 100%;
 }
 
@@ -1066,28 +1053,18 @@ body {
 
 .brand-logo__mark {
   background: transparent;
-  border: 1px solid var(--color-brand-primary);
+  border: 0;
   border-radius: 0;
   box-shadow: none;
-  height: 1.875rem;
+  height: 3.25rem;
   overflow: visible;
-  width: 1.875rem;
+  width: 3.25rem;
 }
 
-.brand-logo__mark::before {
-  background: var(--color-brand-primary);
-  clip-path: polygon(35% 0, 65% 0, 100% 100%, 0 100%);
-  content: "";
-  height: 1.05rem;
-  width: 0.34rem;
-}
-
+.brand-logo__mark::before,
 .brand-logo__mark::after {
-  background: var(--color-accent);
-  height: 2px;
-  inset: 0.4rem auto auto 50%;
-  transform: translateX(-50%);
-  width: 0.55rem;
+  content: none;
+  display: none;
 }
 
 .brand-logo__wordmark strong {

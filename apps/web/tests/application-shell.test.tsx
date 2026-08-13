@@ -33,9 +33,16 @@ describe("Daylight Beacon application shell", () => {
     expect(
       screen.getAllByRole("link", { name: "Moorish Lighthouse home" }),
     ).toHaveLength(2);
-    expect(
-      screen.getAllByRole("img", { name: "Moorish Lighthouse" }),
-    ).toHaveLength(2);
+    const brandMarks = screen.getAllByRole("img", {
+      name: "Moorish Lighthouse",
+    });
+    expect(brandMarks).toHaveLength(2);
+    for (const brandMark of brandMarks) {
+      expect(brandMark).toHaveAttribute(
+        "src",
+        expect.stringContaining("moorish-lighthouse-logo-transparent.png"),
+      );
+    }
     expect(screen.getAllByRole("link", { name: "Shop" })).toHaveLength(3);
     expect(
       screen

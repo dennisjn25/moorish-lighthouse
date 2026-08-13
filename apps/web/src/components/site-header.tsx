@@ -68,7 +68,7 @@ export function BrandLogo() {
           alt="Moorish Lighthouse"
           height={56}
           priority
-          src={publicAsset("/moorish-lighthouse-logo.jpg")}
+          src={publicAsset("/moorish-lighthouse-logo-transparent.png")}
           width={56}
         />
       </span>
