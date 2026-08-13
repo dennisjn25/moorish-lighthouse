@@ -81,7 +81,7 @@ export type Product = {
     | "Physical"
     | "Workshop";
   fulfillment: string;
-  availability: "unavailable" | "coming-soon";
+  availability: "unavailable" | "coming-soon" | "available";
   outcomes: string[];
   audience: string;
   source: ContentSource;

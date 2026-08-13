@@ -4,8 +4,12 @@ import { visionTool } from "@sanity/vision";
 import { schemaTypes } from "./schemaTypes";
 import { structure } from "./structure";
 
-const projectId = process.env.SANITY_STUDIO_PROJECT_ID ?? "testproject";
+const projectId = process.env.SANITY_STUDIO_PROJECT_ID;
 const dataset = process.env.SANITY_STUDIO_DATASET ?? "production";
+
+if (!projectId) {
+  throw new Error("SANITY_STUDIO_PROJECT_ID is required.");
+}
 
 export default defineConfig({
   name: "default",

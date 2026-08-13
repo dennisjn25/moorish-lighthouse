@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    # GitHub Pages is static. Poll published Sanity content every 15 minutes.
+    - cron: "*/15 * * * *"
 
 permissions:
   contents: read
@@ -33,10 +36,10 @@ jobs:
           GITHUB_PAGES: "true"
           GITHUB_REPOSITORY: ${{ github.repository }}
           NEXT_PUBLIC_SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
-          SANITY_PROJECT_ID: ${{ secrets.SANITY_PROJECT_ID }}
-          SANITY_DATASET: ${{ secrets.SANITY_DATASET }}
-          SANITY_API_READ_TOKEN: ${{ secrets.SANITY_API_READ_TOKEN }}
-          SANITY_USE_PREVIEW_FIXTURES: ${{ secrets.SANITY_PROJECT_ID == '' && 'true' || 'false' }}
+          SANITY_PROJECT_ID: lbxxn6ae
+          SANITY_DATASET: production
+          SANITY_REQUIRE_CONTENT: "true"
+          SANITY_USE_PREVIEW_FIXTURES: "false"
       - name: Verify repository-prefixed public assets
         run: node scripts/verify-pages-assets.cjs
       - uses: actions/configure-pages@v5

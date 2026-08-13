@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "sanity dev",
     "build": "sanity build",
+    "seed:production": "sanity exec scripts/seed-production.ts --with-user-token",
+    "verify:publish": "sanity exec scripts/verify-publish-lifecycle.ts --with-user-token",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit"
   },

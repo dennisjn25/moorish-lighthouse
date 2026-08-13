@@ -8,18 +8,6 @@ const slugField = defineField({
   validation: (Rule) => Rule.required(),
 });
 
-const publicationField = defineField({
-  name: "publicationStatus",
-  title: "Publication status",
-  type: "string",
-  initialValue: "draft",
-  options: {
-    layout: "radio",
-    list: ["draft", "review", "published", "archived"],
-  },
-  validation: (Rule) => Rule.required(),
-});
-
 const seoField = defineField({
   name: "seo",
   title: "Search and sharing",
@@ -308,7 +296,6 @@ export const author = defineType({
       type: "array",
       of: [defineArrayMember({ type: "url" })],
     }),
-    publicationField,
   ],
   preview: { select: { title: "name", subtitle: "role", media: "portrait" } },
 });
@@ -359,7 +346,6 @@ export const topic = defineType({
       type: "number",
       validation: (Rule) => Rule.required().integer().min(0),
     }),
-    publicationField,
     seoField,
   ],
 });
@@ -432,7 +418,6 @@ export const lesson = defineType({
       type: "number",
       validation: (Rule) => Rule.required().integer().min(0),
     }),
-    publicationField,
     seoField,
   ],
 });
@@ -509,7 +494,6 @@ export const article = defineType({
       name: "publishedAt",
       title: "Published at",
       type: "datetime",
-      hidden: ({ parent }) => parent?.publicationStatus !== "published",
     }),
     defineField({
       name: "updatedAt",
@@ -550,13 +534,11 @@ export const article = defineType({
         }),
       ],
     }),
-    publicationField,
     seoField,
   ],
   preview: {
     select: {
       title: "title",
-      subtitle: "publicationStatus",
       media: "heroImage",
     },
   },
@@ -660,7 +642,6 @@ export const video = defineType({
       ],
       validation: (Rule) => Rule.max(6),
     }),
-    publicationField,
     seoField,
   ],
 });
@@ -769,7 +750,6 @@ export const product = defineType({
         }),
       ],
     }),
-    publicationField,
     seoField,
   ],
 });

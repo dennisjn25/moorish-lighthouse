@@ -19,31 +19,31 @@ export function buildSanityHeaders(token?: string): Record<string, string> {
 }
 
 const catalogQuery = `{
-  "topics": *[_type == "topic" && publicationStatus == "published" && defined(slug.current)] | order(title asc) {
+  "topics": *[_type == "topic" && defined(slug.current)] | order(title asc) {
     "id": _id, title, "slug": slug.current, summary, introduction,
     "source": {"kind": "official", "label": "Moorish Lighthouse Sanity Studio"},
     "status": "published"
   },
-  "lessons": *[_type == "lesson" && publicationStatus == "published" && defined(slug.current)] | order(order asc, title asc) {
+  "lessons": *[_type == "lesson" && defined(slug.current)] | order(order asc, title asc) {
     "id": _id, title, "slug": slug.current, "topicSlug": topic->slug.current,
     summary, "body": body[].children[].text, level, format, minutes,
     "source": {"kind": "official", "label": "Moorish Lighthouse Sanity Studio"},
     "status": "published"
   },
-  "articles": *[_type == "article" && publicationStatus == "published" && defined(slug.current)] | order(publishedAt desc) {
+  "articles": *[_type == "article" && defined(slug.current)] | order(publishedAt desc) {
     "id": _id, title, "slug": slug.current, "topicSlug": topic->slug.current,
     dek, "body": body[].children[].text, "author": author->name, publishedAt,
     updatedAt, minutes, references,
     "source": {"kind": "official", "label": "Moorish Lighthouse Sanity Studio"},
     "status": "published"
   },
-  "videos": *[_type == "video" && publicationStatus == "published" && defined(slug.current)] | order(title asc) {
+  "videos": *[_type == "video" && defined(slug.current)] | order(title asc) {
     "id": _id, title, "slug": slug.current, "topicSlug": topic->slug.current,
     summary, takeaways, transcript, transcriptEvidence, duration, level, series, youtubeUrl,
     "source": {"kind": "official", "label": "Moorish Lighthouse Sanity Studio", "url": youtubeUrl},
     "status": "published"
   },
-  "products": *[_type == "product" && publicationStatus == "published" && defined(slug.current)] | order(title asc) {
+  "products": *[_type == "product" && defined(slug.current)] | order(title asc) {
     "id": _id, title, "slug": slug.current, summary, type, fulfillment,
     availability, outcomes, audience,
     "source": {"kind": "official", "label": "Moorish Lighthouse Sanity Studio"},
@@ -63,8 +63,17 @@ export const getCatalog = cache(async (): Promise<ContentCatalog> => {
   const projectId = process.env.SANITY_PROJECT_ID;
   const dataset = process.env.SANITY_DATASET;
   const fixtureOnly = process.env.SANITY_USE_PREVIEW_FIXTURES === "true";
+  const requireSanity = process.env.SANITY_REQUIRE_CONTENT === "true";
 
-  if (!projectId || !dataset || fixtureOnly) return previewCatalog;
+  if (fixtureOnly) return previewCatalog;
+  if (!projectId || !dataset) {
+    if (requireSanity) {
+      throw new Error(
+        "Sanity content is required, but SANITY_PROJECT_ID or SANITY_DATASET is missing.",
+      );
+    }
+    return previewCatalog;
+  }
 
   const endpoint = new URL(
     `https://${projectId}.api.sanity.io/v${apiVersion}/data/query/${dataset}`,
@@ -76,12 +85,16 @@ export const getCatalog = cache(async (): Promise<ContentCatalog> => {
       headers: buildSanityHeaders(process.env.SANITY_API_READ_TOKEN),
       next: { revalidate: 300 },
     });
-    if (!response.ok) return previewCatalog;
+    if (!response.ok) {
+      throw new Error(`Sanity query failed with HTTP ${response.status}.`);
+    }
     const payload = (await response.json()) as { result?: unknown };
-    return isCatalog(payload.result)
-      ? { ...payload.result, mode: "sanity" }
-      : previewCatalog;
-  } catch {
+    if (!isCatalog(payload.result)) {
+      throw new Error("Sanity returned an invalid content catalog.");
+    }
+    return { ...payload.result, mode: "sanity" };
+  } catch (error) {
+    if (requireSanity) throw error;
     return previewCatalog;
   }
 });
