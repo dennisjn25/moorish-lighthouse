@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { MagnifyingGlass } from "@phosphor-icons/react/dist/ssr";
+import { useRef } from "react";
 import { Container } from "@/components/ui";
 import { publicAsset } from "@/lib/public-asset";
 
@@ -14,6 +17,11 @@ const navigation = [
 ] as const;
 
 export function SiteHeader() {
+  const mobileMenuRef = useRef<HTMLDetailsElement>(null);
+  const closeMobileMenu = () => {
+    mobileMenuRef.current?.removeAttribute("open");
+  };
+
   return (
     <header className="site-header">
       <Container className="site-header__inner" size="wide">
@@ -36,18 +44,22 @@ export function SiteHeader() {
           </Link>
         </div>
 
-        <details className="mobile-navigation">
+        <details className="mobile-navigation" ref={mobileMenuRef}>
           <summary>Menu</summary>
           <nav aria-label="Mobile primary">
             <ul>
               {navigation.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href}>{item.label}</Link>
+                  <Link href={item.href} onClick={closeMobileMenu}>
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>
             <div className="mobile-navigation__actions">
-              <Link href="/search">Search</Link>
+              <Link href="/search" onClick={closeMobileMenu}>
+                Search
+              </Link>
             </div>
           </nav>
         </details>

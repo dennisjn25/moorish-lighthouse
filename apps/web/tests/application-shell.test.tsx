@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { axe } from "jest-axe";
 import { HomePage } from "@/components/home-page";
 import { BeaconArtwork, ProductArtwork } from "@/components/content-ui";
@@ -52,6 +52,24 @@ describe("Daylight Beacon application shell", () => {
     expect(
       screen.queryByRole("link", { name: "Consulting" }),
     ).not.toBeInTheDocument();
+  });
+
+  it("closes the mobile menu when a navigation link is selected", () => {
+    const { container } = render(<SiteHeader />);
+    const menu = container.querySelector<HTMLDetailsElement>(
+      "details.mobile-navigation",
+    );
+
+    expect(menu).not.toBeNull();
+    menu!.open = true;
+
+    fireEvent.click(
+      screen
+        .getByRole("navigation", { name: "Mobile primary" })
+        .querySelector('a[href="/articles"]')!,
+    );
+
+    expect(menu).not.toHaveAttribute("open");
   });
 
   it("renders the approved premium editorial hero and three purposeful paths", () => {
