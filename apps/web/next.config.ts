@@ -7,6 +7,9 @@ const basePath = isGitHubPages && repositoryName ? `/${repositoryName}` : "";
 const nextConfig: NextConfig = {
   ...(basePath ? { assetPrefix: basePath, basePath } : {}),
   devIndicators: false,
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
+  },
   ...(isGitHubPages ? { output: "export" as const } : {}),
   images: {
     unoptimized: isGitHubPages,

@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { Badge, Breadcrumbs, ButtonLink, Container } from "@/components/ui";
 import type { ContentSource } from "@/lib/content/types";
+import { publicAsset } from "@/lib/public-asset";
 
 export function PreviewNotice() {
   return (
@@ -72,7 +73,7 @@ export function BeaconArtwork({
         fill
         loading="eager"
         sizes="(max-width: 800px) 100vw, 58vw"
-        src={editorialArtwork[variant]}
+        src={publicAsset(editorialArtwork[variant])}
       />
     </div>
   );
@@ -103,7 +104,7 @@ export function ProductArtwork({
         fill
         loading="eager"
         sizes="(max-width: 800px) 100vw, 42vw"
-        src={productArtwork[variant]}
+        src={publicAsset(productArtwork[variant])}
       />
       <span>Concept preview</span>
     </div>

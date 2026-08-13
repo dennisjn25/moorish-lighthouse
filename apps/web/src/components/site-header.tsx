@@ -1,6 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 import { MagnifyingGlass } from "@phosphor-icons/react/dist/ssr";
 import { ButtonLink, Container } from "@/components/ui";
+import { publicAsset } from "@/lib/public-asset";
 
 const navigation = [
   { href: "/", label: "Home" },
@@ -61,7 +63,15 @@ export function SiteHeader() {
 export function BrandLogo() {
   return (
     <Link aria-label="Moorish Lighthouse home" className="brand-logo" href="/">
-      <span aria-hidden="true" className="brand-logo__mark" />
+      <span className="brand-logo__mark">
+        <Image
+          alt="Moorish Lighthouse"
+          height={56}
+          priority
+          src={publicAsset("/moorish-lighthouse-logo.jpg")}
+          width={56}
+        />
+      </span>
       <span className="brand-logo__wordmark">
         <strong>Moorish Lighthouse</strong>
         <small>Author and educator</small>

@@ -4,6 +4,7 @@ import { ButtonLink, Container } from "@/components/ui";
 import { PreviewNotice } from "@/components/content-ui";
 import { previewCatalog } from "@/lib/content/fixtures";
 import type { ContentCatalog } from "@/lib/content/types";
+import { publicAsset } from "@/lib/public-asset";
 
 const paths = [
   {
@@ -65,7 +66,7 @@ export function HomePage({
             loading="eager"
             priority
             sizes="(max-width: 800px) 100vw, 46vw"
-            src="/premium-lighthouse-hero.png"
+            src={publicAsset("/premium-lighthouse-hero.png")}
           />
           <figcaption>Moorish Lighthouse editorial collection</figcaption>
         </figure>
@@ -114,7 +115,7 @@ export function HomePage({
               fill
               loading="eager"
               sizes="(max-width: 800px) 100vw, 52vw"
-              src="/premium-lighthouse-hero.png"
+              src={publicAsset("/premium-lighthouse-hero.png")}
             />
           </div>
           <div className="premium-feature__copy">

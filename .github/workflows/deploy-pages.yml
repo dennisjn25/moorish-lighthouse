@@ -37,6 +37,8 @@ jobs:
           SANITY_DATASET: ${{ secrets.SANITY_DATASET }}
           SANITY_API_READ_TOKEN: ${{ secrets.SANITY_API_READ_TOKEN }}
           SANITY_USE_PREVIEW_FIXTURES: ${{ secrets.SANITY_PROJECT_ID == '' && 'true' || 'false' }}
+      - name: Verify repository-prefixed public assets
+        run: node scripts/verify-pages-assets.cjs
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

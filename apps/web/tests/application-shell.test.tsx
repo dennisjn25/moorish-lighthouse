@@ -33,6 +33,9 @@ describe("Daylight Beacon application shell", () => {
     expect(
       screen.getAllByRole("link", { name: "Moorish Lighthouse home" }),
     ).toHaveLength(2);
+    expect(
+      screen.getAllByRole("img", { name: "Moorish Lighthouse" }),
+    ).toHaveLength(2);
     expect(screen.getAllByRole("link", { name: "Shop" })).toHaveLength(3);
     expect(
       screen
